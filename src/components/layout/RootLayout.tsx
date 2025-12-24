@@ -4,7 +4,7 @@ import Header from "./Header"
 import Footer from "./Footer"
 import { useScrollToTop } from "@/hooks/useScrollToTop"
 
-const transition = { duration: 0.2, ease: "easeOut" }
+const transition = { duration: 0.2, ease: [0.16, 1, 0.3, 1] as const }
 
 export default function RootLayout() {
   const location = useLocation()

@@ -9,19 +9,11 @@ export const contactSchema = z.object({
     .string()
     .min(8, "Informe seu WhatsApp")
     .regex(whatsappRegex, "Formato de WhatsApp invalido"),
-  email: z.preprocess(
-    (value) =>
-      typeof value === "string" && value.trim() === "" ? undefined : value,
-    z.string().email("Email invalido").optional()
-  ),
+  email: z.string().email("Email invalido").optional().or(z.literal("")),
   goal: z.enum(CONTACT_GOALS, {
-    required_error: "Selecione um objetivo",
+    message: "Selecione um objetivo",
   }),
-  message: z.preprocess(
-    (value) =>
-      typeof value === "string" && value.trim() === "" ? undefined : value,
-    z.string().max(500, "Mensagem muito longa").optional()
-  ),
+  message: z.string().max(500, "Mensagem muito longa").optional(),
 })
 
 export type ContactFormValues = z.infer<typeof contactSchema>
